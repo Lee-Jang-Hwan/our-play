@@ -55,7 +55,7 @@ const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
       >
         {/* 헤더 */}
         <div className="flex items-center justify-between h-14 px-4 border-b border-gray-100">
-          <span className="text-xl font-bold text-primary">심테</span>
+          <span className="text-xl font-bold text-primary">MOAB</span>
           <button
             type="button"
             onClick={onClose}
@@ -85,7 +85,7 @@ const MobileNav = ({ isOpen, onClose }: MobileNavProps) => {
         {/* 푸터 */}
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-100">
           <p className="text-xs text-gray-400 text-center">
-            © 2024 심테. All rights reserved.
+            © 2024 MOAB. All rights reserved.
           </p>
         </div>
       </nav>

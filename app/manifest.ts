@@ -2,8 +2,8 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "심테 - 재미있는 심리테스트 모음",
-    short_name: "심테",
+    name: "MOAB - 재미있는 심리테스트 모음",
+    short_name: "MOAB",
     description:
       "MBTI, 성격, 연애, 재미 등 다양한 심리테스트를 무료로 즐겨보세요!",
     start_url: "/",

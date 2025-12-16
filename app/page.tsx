@@ -21,7 +21,9 @@ function toSummary(tests: ReturnType<typeof getPopularTests>): TestSummary[] {
 export default function Home() {
   const popularTests = toSummary(getPopularTests(4));
   const latestTests = toSummary(getLatestTests(4));
-  const personalityTests = toSummary(getTestsByCategory("personality").slice(0, 4));
+  const personalityTests = toSummary(
+    getTestsByCategory("personality").slice(0, 4),
+  );
   const funTests = toSummary(getTestsByCategory("fun").slice(0, 4));
   const mbtiTests = toSummary(getTestsByCategory("mbti").slice(0, 4));
 

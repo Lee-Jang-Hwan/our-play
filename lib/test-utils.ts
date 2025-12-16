@@ -5,11 +5,52 @@ import type {
   TestResultState,
   Result,
 } from "@/types/test";
-import testsData from "@/data/tests.json";
+import testsData from "@/data/tests";
 
 /** 모든 테스트 목록 가져오기 */
 export function getAllTests(): Test[] {
-  return testsData.tests as Test[];
+  // testsData가 배열인 경우 그대로 반환
+  if (Array.isArray(testsData)) {
+    return testsData;
+  }
+
+  // testsData가 객체인 경우
+  if (testsData && typeof testsData === "object") {
+    // 1. testsData.tests가 배열인 경우 (기존 tests.json 구조)
+    if (Array.isArray((testsData as any).tests)) {
+      return (testsData as any).tests;
+    }
+
+    // 2. testsData.default가 배열인 경우
+    if (Array.isArray((testsData as any).default)) {
+      return (testsData as any).default;
+    }
+
+    // 3. testsData 자체가 배열처럼 보이는 경우
+    if ("length" in testsData) {
+      const arrayLike = testsData as any;
+      if (typeof arrayLike.length === "number" && arrayLike.length > 0) {
+        try {
+          return Array.from(arrayLike) as Test[];
+        } catch (e) {
+          // Array.from 실패 시 계속 진행
+        }
+      }
+    }
+  }
+
+  // 그 외의 경우 빈 배열 반환
+  console.error(
+    "Tests data is not loaded correctly. Expected array, got:",
+    typeof testsData,
+    Array.isArray(testsData),
+    (testsData as any)?.constructor?.name,
+    "keys:",
+    Object.keys(testsData || {}),
+    "testsData:",
+    testsData,
+  );
+  return [];
 }
 
 /** 테스트 ID로 테스트 가져오기 */
@@ -46,7 +87,7 @@ export function getLatestTests(limit: number = 10): Test[] {
   return [...getAllTests()]
     .sort(
       (a, b) =>
-        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
     )
     .slice(0, limit);
 }
@@ -72,7 +113,7 @@ export function searchTests(query: string): Test[] {
     (test) =>
       test.title.toLowerCase().includes(lowerQuery) ||
       test.description.toLowerCase().includes(lowerQuery) ||
-      test.tags.some((tag) => tag.toLowerCase().includes(lowerQuery))
+      test.tags.some((tag) => tag.toLowerCase().includes(lowerQuery)),
   );
 }
 
@@ -101,7 +142,7 @@ export function createTestProgress(testId: string): TestProgress {
 export function updateProgressWithAnswer(
   progress: TestProgress,
   questionId: string,
-  optionId: string
+  optionId: string,
 ): TestProgress {
   const test = getTestById(progress.testId);
   if (!test) return progress;
@@ -118,7 +159,7 @@ export function updateProgressWithAnswer(
 
   if (previousOptionId) {
     const previousOption = question.options.find(
-      (o) => o.id === previousOptionId
+      (o) => o.id === previousOptionId,
     );
     if (previousOption) {
       Object.entries(previousOption.scores).forEach(([key, value]) => {
@@ -177,7 +218,7 @@ export function calculateResult(progress: TestProgress): TestResultState {
   // 먼저 minScore/maxScore 범위가 있는 결과 확인
   const totalScore = Object.values(progress.scores).reduce(
     (sum, score) => sum + score,
-    0
+    0,
   );
 
   for (const result of test.results) {
@@ -194,7 +235,7 @@ export function calculateResult(progress: TestProgress): TestResultState {
   // 범위 기반이 아니면 가장 높은 점수 카테고리로
   if (
     !test.results.some(
-      (r) => r.minScore !== undefined || r.maxScore !== undefined
+      (r) => r.minScore !== undefined || r.maxScore !== undefined,
     )
   ) {
     Object.entries(progress.scores).forEach(([key, score]) => {
@@ -202,7 +243,7 @@ export function calculateResult(progress: TestProgress): TestResultState {
         maxScore = score;
         // 결과 ID가 점수 키와 일치하는지 확인
         const matchingResult = test.results.find(
-          (r) => r.id === key || r.type === key
+          (r) => r.id === key || r.type === key,
         );
         if (matchingResult) {
           resultId = matchingResult.id;
@@ -247,7 +288,7 @@ function calculateBloodTypeResult(scores: Record<string, number>): string {
 /** 결과 정보 가져오기 */
 export function getResultById(
   testId: string,
-  resultId: string
+  resultId: string,
 ): Result | undefined {
   const test = getTestById(testId);
   if (!test) return undefined;
@@ -269,7 +310,7 @@ export function formatNumber(num: number): string {
 /** 진행률 계산 (퍼센트) */
 export function calculateProgress(
   currentIndex: number,
-  totalQuestions: number
+  totalQuestions: number,
 ): number {
   if (totalQuestions === 0) return 0;
   return Math.round((currentIndex / totalQuestions) * 100);

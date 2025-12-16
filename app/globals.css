@@ -294,3 +294,43 @@
 .pb-safe {
   padding-bottom: env(safe-area-inset-bottom, 0);
 }
+
+/* 로고 그라데이션 애니메이션 */
+@keyframes logo-sway {
+  0%, 100% {
+    transform: translateX(-50%) rotate(-2deg);
+  }
+  50% {
+    transform: translateX(-50%) rotate(2deg);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.logo-gradient {
+  background: linear-gradient(
+    90deg,
+    #ff6b6b,
+    #feca57,
+    #48dbfb,
+    #ff9ff3,
+    #ff6b6b
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 4s ease-in-out infinite, logo-sway 3s ease-in-out infinite;
+  left: 50%;
+  transform: translateX(-50%);
+}

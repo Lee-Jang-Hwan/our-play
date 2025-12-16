@@ -129,7 +129,83 @@
 
 ---
 
+## Phase 4: 협업 효율성 개선
+
+### 4.1 파일 구조 리팩토링
+
+- [x] `data/tests/` 디렉토리 생성
+- [x] 기존 테스트를 개별 파일로 분리
+  - [x] `data/tests/button-test.json` - 발작버튼 테스트
+  - [x] `data/tests/blood-type-test.json` - 혈액형 테스트
+  - [x] `data/tests/mbti-simple-test.json` - MBTI 테스트
+  - [x] `data/tests/empathy-test.json` - 공감능력 테스트
+  - [x] `data/tests/ghibli-character-test.json` - 에겐&테토 테스트
+- [x] `data/tests/index.ts` 생성 - 모든 테스트 자동 병합
+- [x] `lib/test-utils.ts` 수정 - 분리된 파일 구조 사용
+- [x] 기존 `data/tests.json` 백업 및 제거 (또는 마이그레이션 가이드 작성)
+
+### 4.2 자동 병합 시스템
+
+- [x] `data/tests/index.ts` 구현
+  - [x] 모든 테스트 파일 import
+  - [x] 테스트 배열 병합 로직
+  - [x] 타입 안정성 보장
+- [ ] (선택사항) 동적 import로 자동 인덱싱
+  - [ ] `import.meta.glob` 또는 유사 기능 사용
+  - [ ] 새 파일 추가 시 자동 인식
+
+### 4.3 협업 워크플로우 문서화
+
+- [ ] `docs/COLLABORATION.md` 작성
+  - [ ] 새 테스트 추가 가이드
+  - [ ] 기존 테스트 수정 가이드
+  - [ ] Git 워크플로우 (브랜치 전략, PR 규칙)
+  - [ ] 테스트 파일 네이밍 컨벤션
+  - [ ] 충돌 해결 가이드
+- [ ] 테스트 템플릿 파일 생성
+  - [ ] `data/tests/_template.json` - 새 테스트 작성 가이드
+  - [ ] 필수 필드 및 선택 필드 명시
+  - [ ] 예시 코드 포함
+
+### 4.4 검증 및 테스트
+
+- [x] 리팩토링 후 기능 테스트
+  - [x] 홈 화면 테스트 목록 표시 확인
+  - [x] 테스트 상세 페이지 동작 확인
+  - [x] 테스트 진행 페이지 동작 확인
+  - [x] 결과 페이지 동작 확인
+  - [x] 검색 기능 동작 확인
+- [x] 타입 검증
+  - [x] TypeScript 컴파일 오류 확인
+  - [x] 모든 테스트가 올바른 타입인지 확인
+- [x] 빌드 테스트
+  - [x] `pnpm build` 성공 확인
+  - [x] 프로덕션 빌드 동작 확인
+
+### 4.5 추가 개선 사항 (선택사항)
+
+- [ ] 테스트 메타데이터 분리
+  - [ ] `data/tests-meta.json` - 목록용 경량 데이터
+  - [ ] 상세 데이터는 개별 파일에 저장
+  - [ ] 홈/검색 페이지 성능 최적화
+- [ ] 테스트 검증 스크립트
+  - [ ] `scripts/validate-tests.ts` - 테스트 데이터 유효성 검사
+  - [ ] 필수 필드 누락 체크
+  - [ ] 이미지 경로 유효성 체크
+  - [ ] 점수 계산 로직 검증
+- [ ] 자동 인덱스 생성 스크립트
+  - [ ] `scripts/generate-test-index.ts`
+  - [ ] `data/tests/*.json` 스캔
+  - [ ] `data/tests/index.ts` 자동 생성
+  - [ ] Git pre-commit hook에 통합 (선택사항)
+
+---
+
 ## 기타
 
 - [x] `app/not-found.tsx` - 404 페이지
 - [ ] `.husky/` 디렉토리 (git hooks 설정)
+- [ ] 결과 이미지 추가
+  - [ ] `public/images/results/` 디렉토리 생성
+  - [ ] 31개의 결과 이미지 파일 추가
+  - [ ] 각 이미지 파일명이 `tests.json`의 `imageUrl`과 일치하는지 확인
