@@ -17,7 +17,8 @@ const TestCard = ({ test }: TestCardProps) => {
   return (
     <Link
       href={`/test/${test.id}`}
-      className="group block bg-white rounded-xl overflow-hidden shadow-sm card-hover"
+      className="group block bg-white rounded-xl overflow-hidden shadow-sm card-hover select-none"
+      draggable={false}
     >
       {/* 썸네일 이미지 */}
       <div className="relative aspect-[3/4] bg-gradient-to-br from-primary/10 to-primary/30 overflow-hidden">
@@ -26,9 +27,10 @@ const TestCard = ({ test }: TestCardProps) => {
             src={test.thumbnailUrl}
             alt={test.title}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
+            className="object-cover group-hover:scale-105 transition-transform duration-300 pointer-events-none"
             sizes="(max-width: 640px) 50vw, 200px"
             onError={() => setImageError(true)}
+            draggable={false}
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">

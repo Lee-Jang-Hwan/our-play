@@ -18,13 +18,13 @@ const TestInfo = ({ test }: TestInfoProps) => {
   return (
     <div className="bg-white">
       {/* 커버 이미지 */}
-      <div className="relative aspect-[4/3] bg-gradient-to-br from-primary/10 to-primary/30">
+      <div className="relative aspect-[4/3] bg-gray-50">
         {!imageError ? (
           <Image
             src={test.coverImageUrl}
             alt={test.title}
             fill
-            className="object-cover"
+            className="object-contain"
             priority
             onError={() => setImageError(true)}
           />

@@ -30,44 +30,19 @@ export default function Home() {
   return (
     <div className="pb-8">
       {/* 인기 테스트 */}
-      <TestSection
-        title="인기 테스트"
-        emoji="🔥"
-        tests={popularTests}
-        href="/?category=popular"
-      />
+      <TestSection title="인기 테스트" emoji="🔥" tests={popularTests} />
 
       {/* 최신 테스트 */}
-      <TestSection
-        title="최신 테스트"
-        emoji="🆕"
-        tests={latestTests}
-        href="/?category=latest"
-      />
+      <TestSection title="최신 테스트" emoji="🆕" tests={latestTests} />
 
       {/* 성격 테스트 */}
-      <TestSection
-        title="성격 테스트"
-        emoji="🧠"
-        tests={personalityTests}
-        href="/?category=personality"
-      />
+      <TestSection title="성격 테스트" emoji="🧠" tests={personalityTests} />
 
       {/* MBTI 테스트 */}
-      <TestSection
-        title="MBTI 테스트"
-        emoji="💫"
-        tests={mbtiTests}
-        href="/?category=mbti"
-      />
+      <TestSection title="MBTI 테스트" emoji="💫" tests={mbtiTests} />
 
       {/* 재미 테스트 */}
-      <TestSection
-        title="재미 테스트"
-        emoji="🎮"
-        tests={funTests}
-        href="/?category=fun"
-      />
+      <TestSection title="재미 테스트" emoji="🎮" tests={funTests} />
     </div>
   );
 }
