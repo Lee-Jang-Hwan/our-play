@@ -114,7 +114,7 @@ export function updateProgressWithAnswer(
 
   // 기존 답변이 있으면 해당 점수 제거
   const previousOptionId = progress.answers[questionId];
-  let newScores = { ...progress.scores };
+  const newScores = { ...progress.scores };
 
   if (previousOptionId) {
     const previousOption = question.options.find(

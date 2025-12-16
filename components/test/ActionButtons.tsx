@@ -12,14 +12,12 @@ interface ActionButtonsProps {
   testId: string;
   testTitle: string;
   initialLikeCount: number;
-  initialBookmarkCount: number;
 }
 
 const ActionButtons = ({
   testId,
   testTitle,
   initialLikeCount,
-  initialBookmarkCount,
 }: ActionButtonsProps) => {
   const { isLiked: checkIsLiked, toggleLike } = useLikes();
   const { isBookmarked: checkIsBookmarked, toggleBookmark } = useBookmarks();

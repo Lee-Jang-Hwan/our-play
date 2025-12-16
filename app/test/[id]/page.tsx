@@ -63,7 +63,6 @@ export default async function TestDetailPage({ params }: TestDetailPageProps) {
         testId={test.id}
         testTitle={test.title}
         initialLikeCount={test.likeCount}
-        initialBookmarkCount={test.bookmarkCount}
       />
 
       {/* 비슷한 테스트 추천 */}
