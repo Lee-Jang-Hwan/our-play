@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { ChevronLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import ProgressBar from "@/components/test/ProgressBar";
 import Question from "@/components/test/Question";
 import OptionButton from "@/components/test/OptionButton";
@@ -48,45 +47,42 @@ export default function TestPlayPage() {
   const isLastQuestion =
     progress.currentQuestionIndex === test.questions.length - 1;
 
-  // 옵션 선택 핸들러
+  // 옵션 선택 핸들러 - 선택 후 자동으로 다음으로 이동
   const handleOptionSelect = (optionId: string) => {
     if (isTransitioning) return;
     setSelectedOption(optionId);
-  };
-
-  // 다음 질문으로 이동
-  const handleNext = () => {
-    if (!selectedOption || isTransitioning) return;
-
     setIsTransitioning(true);
 
-    // 진행 상태 업데이트
-    const updatedProgress = updateProgressWithAnswer(
-      progress,
-      currentQuestion.id,
-      selectedOption
-    );
-
-    if (isLastQuestion) {
-      // 결과 계산 후 결과 페이지로 이동
-      const result = calculateResult(updatedProgress);
-
-      // 결과를 sessionStorage에 저장
-      sessionStorage.setItem(
-        `test-result-${testId}`,
-        JSON.stringify(result)
+    // 강조 효과 후 다음으로 이동 (500ms 딜레이)
+    setTimeout(() => {
+      // 진행 상태 업데이트
+      const updatedProgress = updateProgressWithAnswer(
+        progress,
+        currentQuestion.id,
+        optionId
       );
 
-      router.push(`/test/${testId}/result`);
-    } else {
-      // 다음 질문으로
-      setProgress({
-        ...updatedProgress,
-        currentQuestionIndex: updatedProgress.currentQuestionIndex + 1,
-      });
-      setSelectedOption(null);
-      setIsTransitioning(false);
-    }
+      if (isLastQuestion) {
+        // 결과 계산 후 결과 페이지로 이동
+        const result = calculateResult(updatedProgress);
+
+        // 결과를 sessionStorage에 저장
+        sessionStorage.setItem(
+          `test-result-${testId}`,
+          JSON.stringify(result)
+        );
+
+        router.push(`/test/${testId}/result`);
+      } else {
+        // 다음 질문으로
+        setProgress({
+          ...updatedProgress,
+          currentQuestionIndex: updatedProgress.currentQuestionIndex + 1,
+        });
+        setSelectedOption(null);
+        setIsTransitioning(false);
+      }
+    }, 500);
   };
 
   // 이전 질문으로 이동
@@ -147,16 +143,6 @@ export default function TestPlayPage() {
           ))}
         </div>
 
-        {/* 다음 버튼 */}
-        <div className="pt-4 pb-safe">
-          <Button
-            onClick={handleNext}
-            disabled={!selectedOption || isTransitioning}
-            className="w-full h-12 text-base font-semibold"
-          >
-            {isLastQuestion ? "결과 보기" : "다음"}
-          </Button>
-        </div>
       </div>
     </div>
   );

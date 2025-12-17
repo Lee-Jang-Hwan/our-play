@@ -114,12 +114,12 @@ const ShareModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md overflow-hidden">
         <DialogHeader>
           <DialogTitle className="text-center">공유하기</DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-4 py-4">
+        <div className="space-y-4 py-4 overflow-hidden w-full">
           {/* SNS 공유 버튼들 */}
           <div className="flex justify-center gap-4">
             {/* 카카오톡 */}
@@ -174,16 +174,16 @@ const ShareModal = ({
           </div>
 
           {/* 링크 복사 */}
-          <div className="flex items-center gap-2 p-3 bg-gray-100 rounded-lg overflow-hidden max-w-full">
-            <Link2 className="w-5 h-5 text-gray-400 shrink-0" />
-            <span className="flex-1 min-w-0 text-sm text-gray-600 truncate break-all overflow-hidden">
+          <div className="flex items-center gap-2 p-3 bg-gray-100 rounded-lg overflow-hidden w-full box-border">
+            <Link2 className="w-5 h-5 text-gray-400 flex-shrink-0" />
+            <span className="text-sm text-gray-600 truncate overflow-hidden flex-1 min-w-0 max-w-[calc(100%-100px)]">
               {shareUrl}
             </span>
             <Button
               size="sm"
               variant={copied ? "default" : "outline"}
               onClick={handleCopyLink}
-              className="shrink-0"
+              className="flex-shrink-0 ml-auto"
             >
               {copied ? (
                 <>
