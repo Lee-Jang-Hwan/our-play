@@ -133,7 +133,7 @@ export default function TestPlayPage() {
         </div>
 
         {/* 선택지 영역 */}
-        <div className="space-y-3 pb-4 flex-shrink-0">
+        <div className="space-y-3 pb-4 mt-auto flex-shrink-0">
           {currentQuestion.options.map((option) => (
             <OptionButton
               key={option.id}
