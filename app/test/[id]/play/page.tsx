@@ -105,9 +105,9 @@ export default function TestPlayPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col">
-      {/* 헤더 */}
-      <header className="sticky top-0 z-10 bg-white border-b border-gray-100">
+    <div className="h-[100dvh] bg-white flex flex-col overflow-hidden">
+      {/* 헤더 - 진행률 바 */}
+      <header className="flex-shrink-0 bg-white border-b border-gray-100">
         <div className="flex items-center h-14 px-4">
           <button
             type="button"
@@ -127,13 +127,13 @@ export default function TestPlayPage() {
       </header>
 
       {/* 질문 영역 */}
-      <div className="flex-1 flex flex-col px-4 py-1">
-        <div className="flex items-center justify-center py-1 min-h-[48px]">
+      <div className="flex-1 flex flex-col p-4 min-h-0">
+        <div className="flex-1 flex items-center justify-center">
           <Question question={currentQuestion} />
         </div>
 
         {/* 선택지 영역 */}
-        <div className="space-y-1.5 pb-1 mt-auto">
+        <div className="space-y-2 pb-2 flex-shrink-0">
           {currentQuestion.options.map((option) => (
             <OptionButton
               key={option.id}

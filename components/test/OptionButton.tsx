@@ -18,7 +18,7 @@ const OptionButton = ({ option, isSelected, onSelect }: OptionButtonProps) => {
     <button
       type="button"
       onClick={() => onSelect(option.id)}
-      className={`w-full py-2.5 px-4 rounded-xl border-2 text-left transition-all duration-200 option-select ${
+      className={`w-full p-4 rounded-xl border-2 text-left transition-all duration-200 option-select ${
         isSelected
           ? "border-primary bg-primary/5 shadow-md scale-[1.02]"
           : "border-gray-200 bg-white hover:border-primary/50 hover:shadow-sm"
