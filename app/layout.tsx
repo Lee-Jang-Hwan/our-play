@@ -49,7 +49,7 @@ export const metadata: Metadata = {
       "MBTI, 성격, 연애, 재미 등 다양한 심리테스트를 무료로 즐겨보세요!",
     images: [
       {
-        url: "/logo.png",
+        url: "/logo-1.png",
         width: 1200,
         height: 630,
         alt: "MOAB - 재미있는 심리테스트 모음",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     title: "MOAB - 재미있는 심리테스트 모음",
     description:
       "MBTI, 성격, 연애, 재미 등 다양한 심리테스트를 무료로 즐겨보세요!",
-    images: ["/logo.png"],
+    images: ["/logo-1.png"],
   },
   robots: {
     index: true,
