@@ -72,7 +72,8 @@ export default function TestPlayPage() {
           JSON.stringify(result)
         );
 
-        router.push(`/test/${testId}/result`);
+        // 결과 페이지로 이동 (URL에 resultId 포함)
+        router.push(`/test/${testId}/result?r=${result.resultId}`);
       } else {
         // 다음 질문으로
         setProgress({
@@ -127,12 +128,12 @@ export default function TestPlayPage() {
 
       {/* 질문 영역 */}
       <div className="flex-1 flex flex-col p-4">
-        <div className="flex-1 flex flex-col justify-center py-8">
+        <div className="flex items-center justify-center py-4 min-h-[80px]">
           <Question question={currentQuestion} />
         </div>
 
         {/* 선택지 영역 */}
-        <div className="space-y-3 pb-4">
+        <div className="space-y-3 pb-4 mt-auto">
           {currentQuestion.options.map((option) => (
             <OptionButton
               key={option.id}
