@@ -174,9 +174,9 @@ const ShareModal = ({
           </div>
 
           {/* 링크 복사 */}
-          <div className="flex items-center gap-2 p-3 bg-gray-100 rounded-lg">
+          <div className="flex items-center gap-2 p-3 bg-gray-100 rounded-lg overflow-hidden max-w-full">
             <Link2 className="w-5 h-5 text-gray-400 shrink-0" />
-            <span className="flex-1 text-sm text-gray-600 truncate">
+            <span className="flex-1 min-w-0 text-sm text-gray-600 truncate break-all overflow-hidden">
               {shareUrl}
             </span>
             <Button
