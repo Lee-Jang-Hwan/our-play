@@ -127,13 +127,13 @@ export default function TestPlayPage() {
       </header>
 
       {/* 질문 영역 */}
-      <div className="flex-1 flex flex-col p-4">
-        <div className="flex items-center justify-center py-4 min-h-[80px]">
+      <div className="flex-1 flex flex-col px-4 py-1">
+        <div className="flex items-center justify-center py-1 min-h-[48px]">
           <Question question={currentQuestion} />
         </div>
 
         {/* 선택지 영역 */}
-        <div className="space-y-3 pb-4 mt-auto">
+        <div className="space-y-1.5 pb-1 mt-auto">
           {currentQuestion.options.map((option) => (
             <OptionButton
               key={option.id}
